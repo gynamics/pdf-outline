@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+import ast
 from lark import Lark, Transformer
 from pypdf import PdfWriter
 
@@ -22,7 +23,7 @@ grammar = """
 def add_outline(writer, tree):
     def reduce_node(node, parent):
         if node.data == "node":
-            title = node.children[0][1:-1]
+            title = ast.literal_eval(f"{node.children[0]}")
             number = int(node.children[1][2:-1]) - 1
             par = writer.add_outline_item(title, number, parent=parent)
             children = node.children[2:]
@@ -37,12 +38,12 @@ def add_outline(writer, tree):
 
 def main():
     parser = Lark(grammar)
-    with open(sys.argv[3]) as lisp_input:
+    with open(sys.argv[2]) as lisp_input:
         tree = parser.parse(lisp_input.read())
-    with open(sys.argv[2], "rb") as input:
+    with open(sys.argv[3], "rb") as input:
         writer = PdfWriter(clone_from=input)
     add_outline(writer, tree)
-    # print(writer.outline)
+    #print(writer.outline)
     with open(sys.argv[1], "wb") as output:
         writer.write(output)
 
