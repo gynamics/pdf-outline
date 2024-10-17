@@ -9,8 +9,10 @@ class MyPdfReader(PdfReader):
         def format_one_node(node, children, indent):
             lisp = ""
             if node is not None:
+                title = repr(node.title).replace('"', '\\"')[1:-1]
+                number = self.get_destination_page_number(node) + 1
                 lisp += "    " * indent
-                lisp += f'("{node.title}" "#{str(self.get_destination_page_number(node) + 1)}"'
+                lisp += f'("{title}" "#{str(number)}"'
                 if children is not None:
                     lisp += "\n"
                     lisp += outline_to_lisp_r(children, indent + 1)
