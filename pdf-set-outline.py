@@ -3,7 +3,7 @@
 import sys
 import ast
 from lark import Lark, Transformer
-from pypdf import PdfWriter
+from pypdf import PdfReader, PdfWriter
 
 # Define a grammar for parsing nested Lisp-like bookmarks, including double quotes for strings
 grammar = """
@@ -40,8 +40,13 @@ def main():
     parser = Lark(grammar)
     with open(sys.argv[2]) as lisp_input:
         tree = parser.parse(lisp_input.read())
-    with open(sys.argv[3], "rb") as input:
-        writer = PdfWriter(clone_from=input)
+    writer = PdfWriter()
+    with PdfReader(sys.argv[3]) as reader:
+        # clone pdf without outlines
+        if reader.metadata is not None:
+            writer.add_metadata(reader.metadata)
+            writer.append(reader, import_outline=False)
+
     add_outline(writer, tree)
     #print(writer.outline)
     with open(sys.argv[1], "wb") as output:
