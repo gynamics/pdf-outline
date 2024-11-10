@@ -9,7 +9,7 @@ class MyPdfReader(PdfReader):
         def format_one_node(node, children, indent):
             parts = []
             if node is not None:
-                title = repr(node.title).replace('"', '\\"')[1:-1]
+                title = repr(node.title)[1:-1]
                 number = self.get_destination_page_number(node) + 1
                 parts.append("    " * indent)
                 parts.append(f'("{title}" "#{str(number)}"')
