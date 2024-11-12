@@ -17,6 +17,7 @@ grammar = """
     %import common.NUMBER
     %import common.WS
     %ignore WS
+    %ignore /;[^\\n]*/
 """
 
 
