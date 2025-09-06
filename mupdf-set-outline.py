@@ -12,10 +12,10 @@ grammar = """
     node: "(" TITLE PAGE node* ")"
 
     TITLE: ESCAPED_STRING
-    PAGE: "\\"#" NUMBER "\\""
+    PAGE: "\\"#" SIGNED_NUMBER "\\""
 
     %import common.ESCAPED_STRING
-    %import common.NUMBER
+    %import common.SIGNED_NUMBER
     %import common.WS
     %ignore WS
     %ignore /;[^\\n]*/
