@@ -44,9 +44,10 @@ def lisp_to_toc(tree):
 
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage: mupdf-set-outline.py [OUTPUT] [OUTLINE] [INPUT]")
-        sys.exit(1)
+    if len(sys.argv) != 4:
+        print(f"Usage: {sys.argv[0]} [OUTPUT-PDF] [INPUT-OUTLINE] [INPUT-PDF]", file=sys.stderr)
+        return 1
+
     parser = Lark(grammar)
     with open(sys.argv[2]) as lisp_input:
         tree = parser.parse(lisp_input.read())

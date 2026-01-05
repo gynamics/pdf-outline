@@ -24,8 +24,12 @@ def toc_to_lisp(toc):
 
 
 def main():
-    with pymupdf.open(sys.argv[1]) as doc:
-        print(toc_to_lisp(doc.get_toc()))
+    try:
+        with pymupdf.open(sys.argv[1]) as doc:
+            print(toc_to_lisp(doc.get_toc()))
+    except:
+        print(f"Usage: {sys.argv[0]} [PDF FILE]", file=sys.stderr)
+        return 1
 
 if __name__ == "__main__":
     main()
