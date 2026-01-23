@@ -37,8 +37,12 @@ class MyPdfReader(PdfReader):
 
 
 def main():
-    with MyPdfReader(sys.argv[1]) as reader:
-        print(reader.outline_to_lisp())
+    try:
+        with MyPdfReader(sys.argv[1]) as reader:
+            print(reader.outline_to_lisp())
+    except:
+        print(f"Usage: {sys.argv[0]} [PDF FILE]", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
