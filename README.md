@@ -20,13 +20,13 @@ However, I found that surprisingly there is no corresponding tool for pdf docume
 
 This branch uses `mupdf` backend, which is much more efficient than original `pypdf` backend. (See [benchmark of python pdf libraries](https://github.com/py-pdf/benchmarks), the text extraction speed of `mupdf` is about 30x faster than `pypdf`)
 
-Here are two python scripts `mupdf-get-outline.py` and `mupdf-set-outline.py`, which reads outline from a pdf document, or creates a new pdf document with given outline and pdf document. The outline format is exactly the same as which is accepted by `djvused`, so you can simply attach one djvu outline to your pdf file if they have the same page numbering!
+Here are two python scripts `pdf-get-outline.py` and `pdf-set-outline.py`, which reads outline from a pdf document, or creates a new pdf document with given outline and pdf document. The outline format is exactly the same as which is accepted by `djvused`, so you can simply attach one djvu outline to your pdf file if they have the same page numbering!
 
 ```sh
-./mupdf-get-outline.py [PDF-INPUT]
+./pdf-get-outline.py [PDF-INPUT]
 
-./mupdf-set-outline.py [PDF-IN-OUT] [OUTLINE]
-./mupdf-set-outline.py [PDF-OUTPUT] [OUTLINE] [PDF-INPUT]
+./pdf-set-outline.py [PDF-IN-OUT] [OUTLINE]
+./pdf-set-outline.py [PDF-OUTPUT] [OUTLINE] [PDF-INPUT]
 ```
 
 Python requirements are specified in `requirements.txt`, installed them all with `pip install -r requirements.txt`.
